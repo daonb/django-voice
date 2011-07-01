@@ -1,5 +1,6 @@
 {% extends "djangovoice/feedback_base.html" %}
 
+{% load djangovoice_tags %}
 {% load voting_tags %}
 {% load gravatar %}
 {% load comments %}
@@ -40,7 +41,7 @@
                     <span class="feedback-user">
                         {% if feedback.user %}
                         Submitted by: <a href="{{ feedback.user.get_absolute_url }}" class="avatar" title="View profile">{% gravatar feedback.user.username 15 %}</a>
-                        <a href="{{ feedback.user.get_absolute_url }}" title="View profile">{{ feedback.user }}</a>
+                        <a href="{{ feedback.user.get_absolute_url }}" title="View profile">{% user_name feedback.user %}</a>
                         {% else %}
                         Submitted anonymously
                         {% endif %}
