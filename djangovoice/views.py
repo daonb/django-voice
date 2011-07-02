@@ -11,7 +11,9 @@ from djangovoice.models import Feedback
 from djangovoice.forms import *
 from djangovoice.utils import paginate
 from django.utils import simplejson
+from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
+from django.views.generic.base import TemplateView
 import datetime
 import time
 
@@ -28,56 +30,58 @@ def detail(request, object_id):
             'feedback': feedback},
         context_instance=RequestContext(request))
 
+# FIXME: Can not we use ListView?
+class FeedbackListView(TemplateView):
 
-def list(request, list=False, type=False, status=False):
-    feedback = Feedback.objects.all().order_by('-created')
+    template_name = 'djangovoice/list.html'
 
-    if not list:
-        list = "open"
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackListView, self).get_context_data(**kwargs)
+        feedback = Feedback.objects.all().order_by('-created')
+        feedback_list = kwargs.get('list', 'open')
+        feedback_type = kwargs.get('type', 'all')
+        feedback_status = kwargs.get('status', 'all')
 
-    title = "Feedback"
+        if feedback_list == 'open':
+            title = _("Open Feedback")
+            feedback = feedback.filter(status__status='open')
+        elif feedback_list == 'closed':
+            title = _("Closed Feedback")
+            feedback = feedback.filter(status__status='closed')
+        elif feedback_list == 'mine':
+            title = _("My Feedback")
+            feedback = feedback.filter(user=self.request.user)
+        else:
+            title = _("Feedback")
 
-    if list == "open":
-        title = "Open Feedback"
-        feedback = feedback.filter(status__status='open')
-    elif list == "closed":
-        title = "Closed Feedback"
-        feedback = feedback.filter(status__status='closed')
-    elif list == "mine":
-        if not request.user.is_authenticated():
+        if feedback_type != 'all':
+            feedback = feedback.filter(type__slug=feedback_type)
+
+        if feedback_status != 'all':
+            feedback = feedback.filter(status__slug=feedback_status)
+
+        if not self.request.user.is_staff:
+            feedback = feedback.filter(private=False)
+
+        feedback_page = paginate(feedback, 10, self.request)
+
+        context.update({
+                'feedback_list': feedback_page.object_list,
+                'pagination': feedback_page,
+                'list': feedback_list,
+                'status': feedback_status,
+                'type': feedback_type,
+                'navigation_active': feedback_list,
+                'title': title})
+
+        return context
+
+    def get(self, request, *args, **kwargs):
+        if kwargs.get('list') == 'mine' and not request.user.is_authenticated():
             return HttpResponseRedirect(
                 '%s?next=%s' % (reverse('django.contrib.auth.views.login'),
                                 request.path))
-        else:
-            title = "My Feedback"
-            feedback = feedback.filter(user=request.user)
-
-    if not type:
-        type = "all"
-    elif type != "all":
-        feedback = feedback.filter(type__slug=type)
-
-    if not status:
-        status = "all"
-    elif status != "all":
-        feedback = feedback.filter(status__slug=status)
-
-    if request.user.is_staff != True:
-        feedback = feedback.filter(private=False)
-
-    feedback_list = paginate(feedback, 10, request)
-
-    return render_to_response(
-        'djangovoice/list.html', {
-            'feedback_list': feedback_list.object_list,
-            'pagination': feedback_list,
-            'list': list,
-            'status': status,
-            'type': type,
-            'navigation_active': list,
-            'title': title},
-        context_instance=RequestContext(request))
-
+        return super(FeedbackListView, self).get(request, *args, **kwargs)
 
 @login_required
 def widget(request):

@@ -3,6 +3,7 @@ from django.contrib import admin
 admin.autodiscover()
 from voting.views import vote_on_object
 from djangovoice.models import Feedback
+from djangovoice.views import *
 
 
 feedback_dict = {
@@ -11,11 +12,12 @@ feedback_dict = {
 }
 
 # NOTE: can we do something for pep8 here? lines are too long.
-urlpatterns = patterns('',
-    url(r'^$', 'djangovoice.views.list', name='djangovoice_home'),
-    url(r'^(?P<list>all|open|closed|mine)/$', 'djangovoice.views.list', name='djangovoice_list'),
-    url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/$', 'djangovoice.views.list', name='djangovoice_list_type'),
-    url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/(?P<status>[-\w]+)/$', 'djangovoice.views.list', name='djangovoice_list_type_status'),
+urlpatterns = patterns(
+    '',
+    url(r'^$', view=FeedbackListView.as_view(), name='djangovoice_home'),
+    url(r'^(?P<list>all|open|closed|mine)/$', view=FeedbackListView.as_view(), name='djangovoice_list'),
+    url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/$', view=FeedbackListView.as_view(), name='djangovoice_list_type'),
+    url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/(?P<status>[-\w]+)/$', view=FeedbackListView.as_view(), name='djangovoice_list_type_status'),
     url(r'^widget/$', 'djangovoice.views.widget', name='djangovoice_widget'),
     url(r'^submit/$', 'djangovoice.views.submit', name='djangovoice_submit'),
     url(r'^(?P<object_id>\d+)/$', 'djangovoice.views.detail', name='djangovoice_item'),
