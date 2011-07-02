@@ -13,7 +13,9 @@ from djangovoice.utils import paginate
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
 import datetime
 import time
@@ -114,26 +116,27 @@ def widget(request):
         context_instance=RequestContext(request))
 
 
-@login_required
-def submit(request):
-    if request.method == 'POST':
-        form = WidgetForm(request.POST)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            try:
-                if form.data['anonymous'] != "on":
-                    feedback.user = request.user
-            except:
-                    feedback.user = request.user
-            feedback.save()
-            return HttpResponseRedirect(feedback.get_absolute_url())
-    else:
-        form = WidgetForm()
+class FeedbackSubmitView(FormView):
 
-    return render_to_response(
-        'djangovoice/submit.html', {
-            'form': form},
-        context_instance=RequestContext(request))
+    template_name = 'djangovoice/submit.html'
+    form_class = WidgetForm
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        return super(FeedbackSubmitView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        return super(FeedbackSubmitView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        feedback = form.save(commit=False)
+        if form.data.get('anonymous') != 'on':
+            feedback.user = request.user
+
+        feedback.save()
+
+        return HttpResponseRedirect(feedback.get_absolute_url())
 
 
 @login_required
