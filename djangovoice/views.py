@@ -32,6 +32,7 @@ class FeedbackDetailView(DetailView):
 
         return super(FeedbackDetailView, self).get(request, *args, **kwargs)
 
+
 # FIXME: Can not we use ListView?
 class FeedbackListView(TemplateView):
 
@@ -84,6 +85,7 @@ class FeedbackListView(TemplateView):
                 '%s?next=%s' % (reverse('django.contrib.auth.views.login'),
                                 request.path))
         return super(FeedbackListView, self).get(request, *args, **kwargs)
+
 
 class FeedbackWidgetView(FormView):
 
