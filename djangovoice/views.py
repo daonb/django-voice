@@ -30,7 +30,7 @@ class FeedbackDetailView(DetailView):
         feedback = self.get_object()
 
         if feedback.private:
-            if not request.user.is_staff and reuqesst.user != feedback.user:
+            if not request.user.is_staff and request.user != feedback.user:
                 return Http404
 
         return super(FeedbackDetailView, self).get(request, *args, **kwargs)
