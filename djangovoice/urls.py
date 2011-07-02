@@ -22,6 +22,6 @@ urlpatterns = patterns(
     url(r'^submit/$', view=FeedbackSubmitView.as_view(), name='djangovoice_submit'),
     url(r'^(?P<pk>\d+)/$', view=FeedbackDetailView.as_view(), name='djangovoice_item'),
     url(r'^(?P<pk>\d+)/edit/$', view=FeedbackEditView.as_view(), name='djangovoice_edit'),
-    url(r'^(?P<object_id>\d+)/delete/$', 'djangovoice.views.delete', name='djangovoice_delete'),
+    url(r'^(?P<pk>\d+)/delete/$', view=FeedbackDeleteView.as_view(), name='djangovoice_delete'),
     url(r'^(?P<object_id>\d+)/(?P<direction>up|down|clear)/?$', vote_on_object, feedback_dict, name='djangovoice_vote'),
 )

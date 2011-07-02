@@ -15,6 +15,7 @@ from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
 import datetime
@@ -174,16 +175,25 @@ class FeedbackEditView(FormView):
         return HttpResponseRedirect(feedback.get_absolute_url())
 
 
-@login_required
-def delete(request, object_id):
-    feedback = get_object_or_404(Feedback, pk=object_id)
-    if request.user != feedback.user and not request.user.is_staff:
-        return Http404
-    if request.method == 'POST':
-        feedback.delete()
-        return HttpResponseRedirect(reverse('feedback_home'))
+class FeedbackDeleteView(DeleteView):
 
-    return render_to_response(
-        'djangovoice/delete.html', {
-            'feedback': feedback},
-        context_instance=RequestContext(request))
+    template_name = 'djangovoice/delete.html'
+
+    def get_object(self):
+        return Feedback.objects.get(pk=self.kwargs.get('pk'))
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        # FIXME: should feedback user have delete permissions?
+        feedback = self.get_object()
+        if not request.user.is_staff and request.user != feedback.user:
+            raise Http404
+
+        return super(FeedbackDeleteView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        feedback = self.get_object()
+        feedback.delete()
+
+        return HttpResponseRedirect(reverse('djangovoice_home'))
