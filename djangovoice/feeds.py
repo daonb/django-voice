@@ -1,6 +1,7 @@
 from django.contrib.syndication.feeds import Feed
 from djangovoice.models import Feedback
 
+
 class LatestFeedback(Feed):
     title = "Feedback"
     link = "/feedback/"
