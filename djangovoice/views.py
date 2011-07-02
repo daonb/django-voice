@@ -148,15 +148,19 @@ class FeedbackEditView(FormView):
     template_name = 'djangovoice/edit.html'
 
     def get_form_class(self):
+        feedback = self.get_object()
         if self.request.user.is_staff:
             return EditForm
         elif self.request.user == feedback.user:
             return WidgetForm
         return None
 
+    def get_object(self):
+        return Feedback.objects.get(pk=self.kwargs.get('pk'))
+
     def get_form_kwargs(self):
         kwargs = super(FeedbackEditView, self).get_form_kwargs()
-        kwargs.update({'instance': Feedback.objects.get(pk=self.kwargs.get('pk'))})
+        kwargs.update({'instance': self.get_object()})
 
         return kwargs
 
