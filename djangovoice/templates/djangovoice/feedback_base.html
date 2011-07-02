@@ -1,4 +1,6 @@
 {% extends "djangovoice/container.html" %}
+{% load i18n %}
+
 {% block sectionid %}feedback{% endblock %}
 
 {% block script_base %}
@@ -26,7 +28,7 @@
                 </ul>
             </div>
             <div id="title">
-                <a href="{% url djangovoice_home %}">{{ site.name }} Feedback</a>
+                <a href="{% url djangovoice_home %}">{{ site.name }} {% trans "Feedback" %}</a>
             </div>
         </div>
         <div id="actions">
@@ -63,5 +65,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
