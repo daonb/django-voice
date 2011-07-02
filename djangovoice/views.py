@@ -10,11 +10,14 @@ from django.contrib.auth.decorators import login_required
 from djangovoice.models import Feedback
 from djangovoice.forms import *
 from djangovoice.utils import paginate
+from djangovoice.decorators import apply_only_xhr
+from djangovoice.decorators import return_json
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
 import datetime
@@ -88,32 +91,33 @@ class FeedbackListView(TemplateView):
                                 request.path))
         return super(FeedbackListView, self).get(request, *args, **kwargs)
 
-@login_required
-def widget(request):
-    if request.method == 'POST':
-        form = WidgetForm(request.POST)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            try:
-                if form.data['anonymous'] != "on":
-                    feedback.user = request.user
-            except:
-                    feedback.user = request.user
-            feedback.save()
-            data = simplejson.dumps(
-                {'url': feedback.get_absolute_url(),
-                 'errors': False})
-        else:
-            data = simplejson.dumps({'errors': True})
+class FeedbackWidgetView(FormView):
 
-        return HttpResponse(data, mimetype='application/json')
-    else:
-        form = WidgetForm()
+    template_name = 'djangovoice/widget.html'
+    form_class = WidgetForm
 
-    return render_to_response(
-        'djangovoice/widget.html', {
-            'form': form},
-        context_instance=RequestContext(request))
+    @method_decorator(login_required)
+    @method_decorator(apply_only_xhr)
+    def get(self, request, *args, **kwargs):
+        return super(FeedbackWidgetView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    @method_decorator(apply_only_xhr)
+    @method_decorator(return_json)
+    def post(self, request, *args, **kwargs):
+        return super(FeedbackWidgetView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        feedback = form.save(commit=False)
+        if form.cleaned_data.get('anonymous') != 'on':
+            feedback.user = request.user
+        feedback.save()
+
+        response = {'url': feedback.get_absolute_url()}
+        return response
+
+    def form_invalid(self, form):
+        return None
 
 
 class FeedbackSubmitView(FormView):
@@ -144,15 +148,19 @@ class FeedbackEditView(FormView):
     template_name = 'djangovoice/edit.html'
 
     def get_form_class(self):
+        feedback = self.get_object()
         if self.request.user.is_staff:
             return EditForm
         elif self.request.user == feedback.user:
             return WidgetForm
         return None
 
+    def get_object(self):
+        return Feedback.objects.get(pk=self.kwargs.get('pk'))
+
     def get_form_kwargs(self):
         kwargs = super(FeedbackEditView, self).get_form_kwargs()
-        kwargs.update({'instance': Feedback.objects.get(pk=self.kwargs.get('pk'))})
+        kwargs.update({'instance': self.get_object()})
 
         return kwargs
 
@@ -174,16 +182,25 @@ class FeedbackEditView(FormView):
         return HttpResponseRedirect(feedback.get_absolute_url())
 
 
-@login_required
-def delete(request, object_id):
-    feedback = get_object_or_404(Feedback, pk=object_id)
-    if request.user != feedback.user and not request.user.is_staff:
-        return Http404
-    if request.method == 'POST':
-        feedback.delete()
-        return HttpResponseRedirect(reverse('feedback_home'))
+class FeedbackDeleteView(DeleteView):
 
-    return render_to_response(
-        'djangovoice/delete.html', {
-            'feedback': feedback},
-        context_instance=RequestContext(request))
+    template_name = 'djangovoice/delete.html'
+
+    def get_object(self):
+        return Feedback.objects.get(pk=self.kwargs.get('pk'))
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        # FIXME: should feedback user have delete permissions?
+        feedback = self.get_object()
+        if not request.user.is_staff and request.user != feedback.user:
+            raise Http404
+
+        return super(FeedbackDeleteView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        feedback = self.get_object()
+        feedback.delete()
+
+        return HttpResponseRedirect(reverse('djangovoice_home'))

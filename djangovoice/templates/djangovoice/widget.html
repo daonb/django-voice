@@ -10,7 +10,7 @@
 {% csrf_token %}
 <table>
 {% for field in form %}
-    {% include "djangovoice/forms/fields.html" %}
+    {% include "djangovoice/includes/fields.html" %}
 {% endfor %}
     <tr>
         <td></td>
