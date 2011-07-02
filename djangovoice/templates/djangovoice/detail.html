@@ -17,6 +17,7 @@
 
 {% load gravatar %}
 {% load voting_tags %}
+{% load djangovoice_tags %}
 {% score_for_object feedback as score %}
 {% load comments %}
 
@@ -43,17 +44,17 @@
     </div>
     <div class="clear"></div>
 </div>
-      
+
 <h1 id="feedback-detail-heading"><span class="feedback-type feedback-type-{{ feedback.type.slug }}"> {{ feedback.type.title }}</span>{{ feedback.title }} <span class="feedback-status feedback-status-{{ feedback.status.slug }}">{{ feedback.status.title }}</span></h1>
 
-<p><span class="feedback-user">{% if feedback.user %}Submitted by: <a href="{{ feedback.user.get_absolute_url }}" class="avatar" title="View profile">{% gravatar feedback.user.username 15 %}</a> <a href="{{ feedback.user.get_absolute_url }}" title="View profile">{{ feedback.user }}</a>{% else %}Submitted anonymously{% endif %}</span> <span class="feedback-date">on {{ feedback.created|date:"d M Y" }}</span></p>
+<p><span class="feedback-user">{% if feedback.user %}Submitted by: <a href="{{ feedback.user.get_absolute_url }}" class="avatar" title="View profile">{% gravatar feedback.user.username 15 %}</a> <a href="{{ feedback.user.get_absolute_url }}" title="View profile">{% user_name feedback.user %}</a>{% else %}Submitted anonymously{% endif %}</span> <span class="feedback-date">on {{ feedback.created|date:"d M Y" }}</span></p>
 
 
 <div class="clear"></div>
 <br />
 {% if feedback.description %}<p>{{ feedback.description|urlize|linebreaksbr }}</p>{% endif %}
 
-    
+
 {% get_comment_count for feedback as comment_count %}
 {% get_comment_list for feedback as comment_list %}
 
@@ -91,17 +92,17 @@
 {% if request.user.is_authenticated %}
 <h2>Leave a comment</h2>
 {% get_comment_form for feedback as form %}
-    <form action="{% comment_form_target %}" method="POST"> 
+    <form action="{% comment_form_target %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="next" value="{{ feedback.get_absolute_url }}" />
-    {{ form.comment }} 
-    {{ form.honeypot }} 
-    {{ form.content_type }} 
-    {{ form.object_pk }} 
-    {{ form.timestamp }} 
+    {{ form.comment }}
+    {{ form.honeypot }}
+    {{ form.content_type }}
+    {{ form.object_pk }}
+    {{ form.timestamp }}
     {{ form.security_hash }}
     <br /><input type="submit" value="Post comment" id="id_submit" />
-</form> 
+</form>
  {% endif %}
 
 
