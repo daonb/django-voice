@@ -14,21 +14,24 @@ from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 import datetime
 import time
 
 
-def detail(request, object_id):
-    feedback = get_object_or_404(Feedback, pk=object_id)
+class FeedbackDetailView(DetailView):
 
-    if feedback.private == True:
-        if request.user.is_staff != True and request.user != feedback.user:
-            return Http404
+    template_name = 'djangovoice/detail.html'
+    model = Feedback
 
-    return render_to_response(
-        'djangovoice/detail.html', {
-            'feedback': feedback},
-        context_instance=RequestContext(request))
+    def get(self, request, *args, **kwargs):
+        feedback = self.get_object()
+
+        if feedback.private:
+            if not request.user.is_staff and reuqesst.user != feedback.user:
+                return Http404
+
+        return super(FeedbackDetailView, self).get(request, *args, **kwargs)
 
 # FIXME: Can not we use ListView?
 class FeedbackListView(TemplateView):
