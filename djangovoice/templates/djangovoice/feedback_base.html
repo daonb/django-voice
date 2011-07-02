@@ -2,7 +2,7 @@
 {% block sectionid %}feedback{% endblock %}
 
 {% block script_base %}
-    <link rel="alternate" type="application/rss+xml" title="{% trans "Latest feedback" %}" href="/feeds/feedback/" />
+<link rel="alternate" type="application/rss+xml" title="{% trans "Latest feedback" %}" href="{% url feeds_latest %}" />
 {% endblock %}
 
 {% block body %}
@@ -13,11 +13,15 @@
             <div id="navigation">
                 <ul>
                     {% block navigation %}
-                        <li{% ifequal navigation_active 'all' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'all' %}">{% trans "All" %}</a></li>
-                        <li{% ifequal navigation_active 'open' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'open' %}">{% trans "Open" %}</a></li>
-                        <li{% ifequal navigation_active 'closed' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'closed' %}">{% trans "Closed" %}</a></li>
-                        <li{% ifequal navigation_active 'mine' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'mine' %}">{% trans "Mine" %}</a></li>
-                        <li class="feed-link"><a href="/feeds/feedback/" title="{% trans "Subscribe to the feedback RSS feed" %}"><img src="{{ STATIC_URL }}djangovoice/images/rss.png" alt="RSS" /></a></li>
+                    <li{% ifequal navigation_active 'all' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'all' %}">{% trans "All" %}</a></li>
+                    <li{% ifequal navigation_active 'open' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'open' %}">{% trans "Open" %}</a></li>
+                    <li{% ifequal navigation_active 'closed' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'closed' %}">{% trans "Closed" %}</a></li>
+                    <li{% ifequal navigation_active 'mine' %} class="active"{% endifequal %}><a href="{% url djangovoice_list 'mine' %}">{% trans "Mine" %}</a></li>
+                    <li class="feed-link">
+                        <a href="{% url feeds_latest %}" title="{% trans "Subscribe to the feedback RSS feed" %}">
+                            <img src="{{ STATIC_URL }}djangovoice/images/rss.png" alt="RSS" />
+                        </a>
+                    </li>
                     {% endblock %}
                 </ul>
             </div>

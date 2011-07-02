@@ -4,6 +4,7 @@ admin.autodiscover()
 from voting.views import vote_on_object
 from djangovoice.models import Feedback
 from djangovoice.views import *
+from djangovoice.feeds import LatestFeedback
 
 
 feedback_dict = {
@@ -24,4 +25,5 @@ urlpatterns = patterns(
     url(r'^(?P<pk>\d+)/edit/$', view=FeedbackEditView.as_view(), name='djangovoice_edit'),
     url(r'^(?P<pk>\d+)/delete/$', view=FeedbackDeleteView.as_view(), name='djangovoice_delete'),
     url(r'^(?P<object_id>\d+)/(?P<direction>up|down|clear)/?$', vote_on_object, feedback_dict, name='djangovoice_vote'),
+    url(r'^feeds/latest/$', view=LatestFeedback(), name='feeds_latest'),
 )
