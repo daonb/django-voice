@@ -139,30 +139,39 @@ class FeedbackSubmitView(FormView):
         return HttpResponseRedirect(feedback.get_absolute_url())
 
 
-@login_required
-def edit(request, object_id):
-    feedback = get_object_or_404(Feedback, pk=object_id)
+class FeedbackEditView(FormView):
 
-    if request.user.is_staff:
-        form_class = EditForm
-    elif request.user == feedback.user:
-        form_class = WidgetForm
-    else:
-        return Http404
+    template_name = 'djangovoice/edit.html'
 
-    if request.method == 'POST':
-        form = form_class(request.POST, instance=feedback)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(feedback.get_absolute_url())
-    else:
-        form = form_class(instance=feedback)
+    def get_form_class(self):
+        if self.request.user.is_staff:
+            return EditForm
+        elif self.request.user == feedback.user:
+            return WidgetForm
+        return None
 
-    return render_to_response(
-        'djangovoice/edit.html', {
-            'form': form,
-            'feedback': feedback},
-        context_instance=RequestContext(request))
+    def get_form_kwargs(self):
+        kwargs = super(FeedbackEditView, self).get_form_kwargs()
+        kwargs.update({'instance': Feedback.objects.get(pk=self.kwargs.get('pk'))})
+
+        return kwargs
+
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        if not form_class:
+            raise Http404
+
+        return super(FeedbackEditView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    def post(self, request, *args, **kwargs):
+        return super(FeedbackEditView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        feedback = form.save()
+
+        return HttpResponseRedirect(feedback.get_absolute_url())
 
 
 @login_required
