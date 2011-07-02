@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from djangovoice.models import Feedback
 from djangovoice.forms import *
 from djangovoice.utils import paginate
+from djangovoice.decorators import apply_only_xhr
+from djangovoice.decorators import return_json
 from django.utils import simplejson
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
@@ -89,32 +91,33 @@ class FeedbackListView(TemplateView):
                                 request.path))
         return super(FeedbackListView, self).get(request, *args, **kwargs)
 
-@login_required
-def widget(request):
-    if request.method == 'POST':
-        form = WidgetForm(request.POST)
-        if form.is_valid():
-            feedback = form.save(commit=False)
-            try:
-                if form.data['anonymous'] != "on":
-                    feedback.user = request.user
-            except:
-                    feedback.user = request.user
-            feedback.save()
-            data = simplejson.dumps(
-                {'url': feedback.get_absolute_url(),
-                 'errors': False})
-        else:
-            data = simplejson.dumps({'errors': True})
+class FeedbackWidgetView(FormView):
 
-        return HttpResponse(data, mimetype='application/json')
-    else:
-        form = WidgetForm()
+    template_name = 'djangovoice/widget.html'
+    form_class = WidgetForm
 
-    return render_to_response(
-        'djangovoice/widget.html', {
-            'form': form},
-        context_instance=RequestContext(request))
+    @method_decorator(login_required)
+    @method_decorator(apply_only_xhr)
+    def get(self, request, *args, **kwargs):
+        return super(FeedbackWidgetView, self).get(request, *args, **kwargs)
+
+    @method_decorator(login_required)
+    @method_decorator(apply_only_xhr)
+    @method_decorator(return_json)
+    def post(self, request, *args, **kwargs):
+        return super(FeedbackWidgetView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        feedback = form.save(commit=False)
+        if form.cleaned_data.get('anonymous') != 'on':
+            feedback.user = request.user
+        feedback.save()
+
+        response = {'url': feedback.get_absolute_url()}
+        return response
+
+    def form_invalid(self, form):
+        return None
 
 
 class FeedbackSubmitView(FormView):

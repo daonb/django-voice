@@ -18,7 +18,7 @@ urlpatterns = patterns(
     url(r'^(?P<list>all|open|closed|mine)/$', view=FeedbackListView.as_view(), name='djangovoice_list'),
     url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/$', view=FeedbackListView.as_view(), name='djangovoice_list_type'),
     url(r'^(?P<list>all|open|closed|mine)/(?P<type>[-\w]+)/(?P<status>[-\w]+)/$', view=FeedbackListView.as_view(), name='djangovoice_list_type_status'),
-    url(r'^widget/$', 'djangovoice.views.widget', name='djangovoice_widget'),
+    url(r'^widget/$', view=FeedbackWidgetView.as_view(), name='djangovoice_widget'),
     url(r'^submit/$', view=FeedbackSubmitView.as_view(), name='djangovoice_submit'),
     url(r'^(?P<pk>\d+)/$', view=FeedbackDetailView.as_view(), name='djangovoice_item'),
     url(r'^(?P<pk>\d+)/edit/$', view=FeedbackEditView.as_view(), name='djangovoice_edit'),
