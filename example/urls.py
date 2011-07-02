@@ -7,4 +7,5 @@ urlpatterns = patterns(
     '',
     url(r'^$', 'example.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^feedback/', include('djangovoice.urls')))
+    url(r'^feedback/', include('djangovoice.urls')),
+    (r'^comments/', include('django.contrib.comments.urls')))
