@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import Http404
+from django.utils.translation import ugettext as _
 from djangovoice.models import Feedback
 from djangovoice.forms import *
 from djangovoice.utils import paginate
