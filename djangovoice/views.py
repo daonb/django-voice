@@ -46,7 +46,8 @@ def list(request, list=False, type=False, status=False):
     elif list == "mine":
         if not request.user.is_authenticated():
             return HttpResponseRedirect(
-                '/accounts/login/?next=%s' % request.path)
+                '%s?next=%s' % (reverse('django.contrib.auth.views.login'),
+                                request.path))
         else:
             title = "My Feedback"
             feedback = feedback.filter(user=request.user)
