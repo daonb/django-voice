@@ -132,7 +132,7 @@ class FeedbackSubmitView(FormView):
     def form_valid(self, form):
         feedback = form.save(commit=False)
         if form.data.get('anonymous') != 'on':
-            feedback.user = request.user
+            feedback.user = self.request.user
 
         feedback.save()
 
