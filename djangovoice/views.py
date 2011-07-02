@@ -1,27 +1,21 @@
-from django.shortcuts import render_to_response, get_object_or_404
-from django.template import RequestContext, loader
-from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.contrib.auth.models import User
-from django import forms
-from django.forms import ModelForm
-from django.forms import widgets
-from django.forms.util import ValidationError
-from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.http import Http404
 from djangovoice.models import Feedback
 from djangovoice.forms import *
 from djangovoice.utils import paginate
-from djangovoice.decorators import apply_only_xhr
-from djangovoice.decorators import return_json
-from django.utils import simplejson
-from django.utils.translation import ugettext as _
-from django.core.urlresolvers import reverse
-from django.utils.decorators import method_decorator
+
+# generic views
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import FormView
 from django.views.generic.detail import DetailView
-import datetime
-import time
+
+# decorators
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from djangovoice.decorators import apply_only_xhr
+from djangovoice.decorators import return_json
 
 
 class FeedbackDetailView(DetailView):
