@@ -7,10 +7,10 @@ from djangovoice.models import Feedback
 
 feedback_dict = {
     'model': Feedback,
-    'template_object_name': 'feedback',
+    'template_object_name': 'feedback'
 }
 
-
+# NOTE: can we do something for pep8 here? lines are too long.
 urlpatterns = patterns('',
     url(r'^$', 'djangovoice.views.list', name='djangovoice_home'),
     url(r'^(?P<list>all|open|closed|mine)/$', 'djangovoice.views.list', name='djangovoice_list'),
