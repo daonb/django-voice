@@ -1,0 +1,4 @@
+0.1.0:
+	- If available show users fullname, else username.
+	- Use generic views.
+	- Add translation support.
