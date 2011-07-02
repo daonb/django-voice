@@ -99,3 +99,5 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = "/admin/login"
