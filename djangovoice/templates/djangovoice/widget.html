@@ -13,7 +13,11 @@
 </script>
 <script type="text/javascript" src="{{ STATIC_URL }}djangovoice/js/djangovoice.js"></script>
 
-<div class="djangovoice-widget">
+<div id="djangovoice-widget">
+    <p>{% trans "feedback" %}</p>
+</div>
+
+<div id="djangovoice-dialogbox" style="display: none;">
     <div id="feedback-widget-close">
         <img src="{{ STATIC_URL }}images/dialog_close.png" alt="X" />
     </div>
