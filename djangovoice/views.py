@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import Http404
@@ -92,6 +93,14 @@ class FeedbackWidgetView(FormView):
 
     template_name = 'djangovoice/widget.html'
     form_class = WidgetForm
+
+    def get_context_data(self, **kwargs):
+        context = super(FeedbackWidgetView, self).get_context_data(**kwargs)
+        jquery_path = getattr(settings, 'DJANGOVOICE_JQUERY_PATH',
+                              '%sadmin/js/jquery.min.js' % settings.STATIC_URL)
+        context.update({'DJANGOVOICE_JQUERY_PATH': jquery_path})
+
+        return context
 
     @method_decorator(login_required)
     @method_decorator(apply_only_xhr)
