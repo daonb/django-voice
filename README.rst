@@ -51,8 +51,9 @@ AUTHORS
 DjangoVoice was originall created by Huw Wilkins (http://huwshimi.com/)
 
 Contributors:
-Ross Poulton http://rossp.org/
-Gökmen Görgen http://gokmengorgen.net/
-Mirat Can Bayrak http://miratcanbayrak.blogspot.com/
+
+ * Ross Poulton http://rossp.org/
+ * Gökmen Görgen http://gokmengorgen.net/
+ * Mirat Can Bayrak http://miratcanbayrak.blogspot.com/
 
 .. _pip: http://www.pip-installer.org/en/latest/index.html
