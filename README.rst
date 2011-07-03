@@ -2,9 +2,7 @@
 Django Voice
 ============
 
-DjangoVoice is a very simple application to enable user feedback that is integrated with your Django project.
-
-Originally built for Verb (http://verbapp.com), and can be seen working at Verb feedback (that is a live site, please do not use it to try out the system).
+DjangoVoice is a very simple application to enable user feedback that is integrated with your Django project. Originally built for Verb (http://verbapp.com)
 
 Installation and Dependencies
 =============================
@@ -45,5 +43,16 @@ and urls.py like this:
       ...
       url(r'^comments/', include('django.contrib.comments.urls')),
       url(r'^feedback/', include('djangovoice.urls')))
+
+These are all that you need to do run django voice.
+
+AUTHORS
+=======
+DjangoVoice was originall created by Huw Wilkins (http://huwshimi.com/)
+
+Contributors:
+Ross Poulton http://rossp.org/
+Gökmen Görgen http://gokmengorgen.net/
+Mirat Can Bayrak http://miratcanbayrak.blogspot.com/
 
 .. _pip: http://www.pip-installer.org/en/latest/index.html
