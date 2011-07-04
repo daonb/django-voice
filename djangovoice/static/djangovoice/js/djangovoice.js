@@ -6,14 +6,16 @@ var dv_data = {
 };
 
 var dv_connectSignals = function() {
+    var closeButton = dv_data.div.dialogbox.getElementsByTagName('img')[0];
     dv_data.div.widget.onclick = function() {
         if (dv_data.div.dialogbox.style.display === 'block') {
             dv_data.div.dialogbox.style.display = 'none';
-            console.log("hide");
         } else {
             dv_data.div.dialogbox.style.display = 'block';
-            console.log("show");
         }
+    };
+    closeButton.onclick = function() {
+        dv_data.div.dialogbox.style.display = 'none';
     };
 };
 
