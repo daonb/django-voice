@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template import Library
 
 register = Library()
@@ -15,11 +14,6 @@ def user_name(user):
 
 @register.inclusion_tag('djangovoice/tags/widget.html', takes_context=True)
 def djangovoice_widget(context):
-    jquery_path = getattr(settings, 'DJANGOVOICE_JQUERY_PATH',
-                          '%sadmin/js/jquery.min.js' % settings.STATIC_URL)
-    arguments = {
-        'DJANGOVOICE_JQUERY_PATH': jquery_path,
-        'STATIC_URL': context.get('STATIC_URL')
-        }
+    arguments = {'STATIC_URL': context.get('STATIC_URL')}
 
     return arguments

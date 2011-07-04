@@ -1,34 +1,20 @@
-var dv_initialize = function($) {
-    var dv_data = {
-        div: {
-            widget: $('#djangovoice-widget'),
-            dialogbox: $('#djangovoice-dialogbox')
-        }
-    };
-
-    var dv_connectSignals = function() {
-        dv_data.div.widget.bind('click', function() {
-            dv_data.div.dialogbox.toggle();
-        });
-    };
-
-    dv_connectSignals();
+var dv_data = {
+    div: {
+        widget: document.getElementById('djangovoice-widget'),
+        dialogbox: document.getElementById('djangovoice-dialogbox')
+    }
 };
 
-try {
-    var dv_$ = $;
-} catch(err) {
-    if(err.type === 'not_defined') {
-        var jquery = document.createElement('script');
-        jquery.type = 'text/javascript';
-        jquery.src = window.dv_jqueryPath;
-        jquery.onload = dv_initialize($);
+var dv_connectSignals = function() {
+    dv_data.div.widget.onclick = function() {
+        if (dv_data.div.dialogbox.style.display === 'block') {
+            dv_data.div.dialogbox.style.display = 'none';
+            console.log("hide");
+        } else {
+            dv_data.div.dialogbox.style.display = 'block';
+            console.log("show");
+        }
+    };
+};
 
-        document.head.appendChild(jquery);
-        console.log(jquery);
-
-        dv_$ = $;
-    }
-}
-
-dv_initialize(dv_$);
+dv_connectSignals();
