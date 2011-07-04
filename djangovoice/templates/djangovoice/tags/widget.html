@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    window.dv_jqueryPath = '{{ DJANGOVOICE_JQUERY_PATH }}';
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}djangovoice/js/djangovoice.js"></script>
+
+<div id="djangovoice-widget">
+    <p>{% trans "feedback" %}</p>
+</div>
+
+<iframe id="djangovoice-dialogbox" style="display: none;" allowtransparency="true" scrolling="no" frameborder="0" src=""></iframe>
