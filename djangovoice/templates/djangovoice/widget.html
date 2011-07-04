@@ -7,32 +7,35 @@
         <h1>{% trans "Feedback" %}</h1>
 
         <div id="content">
-            <p class="help-text">
-                {% blocktrans %}
-                We really value your feedback. Please let us know about any issues or ideas you have. Unless marked as private your feedback will apear on the feedback page and other users will be able to view, comment on and rate it.
-                {% endblocktrans %}
-            </p>
-
             <form action="{% url djangovoice_submit %}" method="post">
-                <table>
-                    {% for field in form %}
-                    {% include "djangovoice/includes/fields.html" %}
-                    {% endfor %}
-                    <tr>
-                        <td></td>
-                        <td>
-                            <br />
-                            <input type="submit" value="{% trans "Submit" %}" />
-                        </td>
-                    </tr>
-                </table>
+                {% csrf_token %}
+                <ul>
+                    <li><input id="id_title" type="text" name="title" placeholder="{% trans "Title (required)" %}" /></li>
+                    <li>
+                        <textarea id="id_description" rows="10" cols="40" name="description"
+                                  placeholder="{% trans "Write description about your thinking." %}"></textarea>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>
+                                {{ form.type.label }}
+                                {{ form.type }}
+                            </li>
+                            <li>
+                                {{ form.anonymous.label }}
+                                {{ form.anonymous }}
+                            </li>
+                            <li>
+                                {{ form.private.label }}
+                                {{ form.private }}
+                            </li>
+                            <li class="submit">
+                                <input type="submit" value="{% trans "Submit" %}" />
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </form>
         </div>
-
-        <div id="feedback-widget-loading">
-            <img src="{{ STATIC_URL }}djangovoice/images/loading.gif" alt="loading..." /> Submitting feedback&hellip;
-        </div>
-
-        <div id="feedback-widget-response"></div>
     </body>
 </html>

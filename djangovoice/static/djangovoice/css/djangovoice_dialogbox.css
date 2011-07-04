@@ -9,15 +9,53 @@ body {
 h1 {
     margin: 0;
     padding: 5px 15px;
-    background-color: #222;
+    background-color: #999;
     font-size: 20px;
     color: #fff;
+    text-shadow: #222 0 0 5px;
+    border-bottom: 1px solid #555;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul ul li {
+    display: inline;
+}
+
+textarea, input[type="text"] {
+    margin: 0;
+    padding: 5px;
+    border: 1px solid #999;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+textarea {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+input#id_title {
+    margin: 10px 0;
+    width: 100%;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 #content {
     padding: 10px;
+    color: #444;
 }
 
 #content p {
     margin: 0;
+}
+
+#content p.help-text {
+    text-align: justify
 }
