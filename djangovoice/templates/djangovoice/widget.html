@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangovoice/css/djangovoice_dialogbox.css" />
+    </head>
+    <body>
+        <h1>{% trans "Feedback" %}</h1>
+
+        <div id="content">
+            <p class="help-text">
+                {% blocktrans %}
+                We really value your feedback. Please let us know about any issues or ideas you have. Unless marked as private your feedback will apear on the feedback page and other users will be able to view, comment on and rate it.
+                {% endblocktrans %}
+            </p>
+
+            <form action="{% url djangovoice_submit %}" method="post">
+                <table>
+                    {% for field in form %}
+                    {% include "djangovoice/includes/fields.html" %}
+                    {% endfor %}
+                    <tr>
+                        <td></td>
+                        <td>
+                            <br />
+                            <input type="submit" value="{% trans "Submit" %}" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div id="feedback-widget-loading">
+            <img src="{{ STATIC_URL }}djangovoice/images/loading.gif" alt="loading..." /> Submitting feedback&hellip;
+        </div>
+
+        <div id="feedback-widget-response"></div>
+    </body>
+</html>
