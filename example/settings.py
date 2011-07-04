@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'django.contrib.comments',
     'voting',
     'gravatar',
+    'base',
     # the important point is...
     'djangovoice'
 )
