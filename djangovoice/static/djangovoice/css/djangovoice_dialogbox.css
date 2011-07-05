@@ -40,6 +40,10 @@ textarea {
     width: 100%;
 }
 
+input[type="submit"] {
+    float: right;
+}
+
 input#id_title {
     margin: 10px 0;
     width: 100%;
