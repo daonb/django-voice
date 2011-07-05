@@ -7,6 +7,7 @@
         <h1>{% trans "Feedback" %}</h1>
 
         <div id="content">
+            {% if user.is_authenticated %}
             <form action="{% url djangovoice_submit %}" method="post">
                 {% csrf_token %}
                 <ul>
@@ -30,12 +31,15 @@
                                 {{ form.private }}
                             </li>
                             <li class="submit">
-                                <input type="submit" value="{% trans "Submit" %}" />
+                                <input type="submit" onclick="this.form.target='_blank'" value="{% trans "Submit" %}" />
                             </li>
                         </ul>
                     </li>
                 </ul>
             </form>
+            {% else %}
+            <p>{% trans "Please login to use feedback application." %}</p>
+            {% endif %}
         </div>
     </body>
 </html>
