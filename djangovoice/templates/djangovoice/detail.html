@@ -98,7 +98,7 @@
                     {% ifequal comment.user user %}
                     {% trans "you" %}
                     {% else %}
-                    <a href="{{ comment.user.get_absolute_url }}">{{ comment.user }}</a>
+                    <a href="{{ comment.user.get_absolute_url }}">{% user_name comment.user %}</a>
                     {% endifequal %}
                 </strong>
                 {% trans "on" %} {{ comment.submit_date|date:"M d Y" }} {% trans "at" %} {{ comment.submit_date|date:"fA" }}
