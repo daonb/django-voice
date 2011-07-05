@@ -59,7 +59,7 @@ class Feedback(models.Model):
     status = models.ForeignKey(Status)
     duplicate = models.ForeignKey('self', null=True, blank=True)
 
-    def save(self):
+    def save(self, *args, **kwargs):
         try:
             self.status
         except:
