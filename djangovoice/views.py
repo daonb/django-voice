@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.http import Http404
@@ -97,22 +98,26 @@ class FeedbackWidgetView(FormView):
         return super(FeedbackWidgetView, self).get(request, *args, **kwargs)
 
     @method_decorator(login_required)
-    @method_decorator(apply_only_xhr)
-    @method_decorator(return_json)
     def post(self, request, *args, **kwargs):
         return super(FeedbackWidgetView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
         feedback = form.save(commit=False)
         if form.cleaned_data.get('anonymous') != 'on':
-            feedback.user = request.user
+            feedback.user = self.request.user
         feedback.save()
 
-        response = {'url': feedback.get_absolute_url()}
-        return response
+        success_url = reverse('djangovoice_item', args=[feedback.pk])
+        messages.add_message(
+            self.request, messages.SUCCESS, _("Thanks for feedback."))
+
+        return HttpResponseRedirect(reverse('djangovoice_widget'))
 
     def form_invalid(self, form):
-        return None
+        messages.add_message(self.request, messages.ERROR,
+                             _("Form is invalid."))
+
+        return super(FeedbackWidgetView, self).form_invalid(form)
 
 
 class FeedbackSubmitView(FormView):

@@ -45,7 +45,7 @@ input[type="submit"] {
 }
 
 input#id_title {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     width: 100%;
     font-weight: bold;
     font-size: 14px;
@@ -62,4 +62,26 @@ input#id_title {
 
 #content p.help-text {
     text-align: justify
+}
+
+.messages li {
+    padding: 5px 10px;
+}
+
+.messages li.error {
+    background-color: #ffe3e3;
+    border-bottom: 1px solid #dd0000;
+    color: #dd0000;
+}
+
+.messages li.success {
+    background-color: #DFFFDF;
+    border-bottom: 1px solid #9FCF9F;
+    color: #005F00;
+}
+
+.messages li.info {
+    background-color: #E5ECF9;
+    border-bottom: 1px solid #09F;
+    color: #09F;
 }

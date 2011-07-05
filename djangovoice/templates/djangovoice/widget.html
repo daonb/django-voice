@@ -6,9 +6,19 @@
     <body>
         <h1>{% trans "Feedback" %}</h1>
 
+        <ul class="messages">
+            {% if messages %}
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            {% else %}
+            <li class="info">{% trans "Share your thinking with us." %}</li>
+            {% endif %}
+        </ul>
+
         <div id="content">
             {% if user.is_authenticated %}
-            <form action="{% url djangovoice_submit %}" method="post">
+            <form action="{% url djangovoice_widget %}" method="post">
                 {% csrf_token %}
                 <ul>
                     <li><input id="id_title" type="text" name="title" placeholder="{% trans "Title (required)" %}" /></li>
@@ -30,8 +40,8 @@
                                 {{ form.private.label }}
                                 {{ form.private }}
                             </li>
-                            <li class="submit">
-                                <input type="submit" onclick="this.form.target='_blank'" value="{% trans "Submit" %}" />
+                            <li>
+                                <input type="submit" value="{% trans "Submit" %}" />
                             </li>
                         </ul>
                     </li>

@@ -17,7 +17,13 @@
 </div>
 
 <div id="djangovoice-dialogbox" style="display: none; width: 100%; text-align: center; position: fixed; top: 20%;">
-    <iframe allowtransparency="true" scrolling="no" frameborder="0" width="500" height="300" src="{% url djangovoice_widget %}"
+    <iframe id="djangovoice-iframe"
+            allowtransparency="true"
+            scrolling="no"
+            frameborder="0"
+            width="500"
+            height="300"
+            src="{% url djangovoice_widget %}"
             style="vertical-align: top; margin-top: 15px;
                    border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px;
                    box-shadow: 0 0 10px #777; -moz-box-shadow: 0 0 10px #777; -webkit-box-shadow: 0 0 10px #777;"></iframe>
