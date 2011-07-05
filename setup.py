@@ -1,7 +1,9 @@
+# -*- coding: utf-8 -*-
+
 from setuptools import setup, find_packages
 import os
 
-version = 'svn'
+version = '0.1'
 
 LONG_DESCRIPTION = """
 ============
@@ -24,9 +26,9 @@ setup(
         "Environment :: Web Environment",
     ],
     keywords='django,feedback,discussion',
-    author='Huwshimi',
-    author_email='huw@huwshimi.com',
-    url='http://code.google.com/p/django-voice/',
+    author='Gökmen Görgen',
+    author_email='gokmen@alageek.com',
+    url='https://github.com/gkmngrgn/django-voice',
     license='BSD',
     packages=find_packages(),
     include_package_data=True,
