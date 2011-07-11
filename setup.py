@@ -16,7 +16,7 @@ your users, who can then vote and comment on other suggestions.
 setup(
     name='django-voice',
     version=get_version(),
-    description="django-voice",
+    description="A feedback application for Django 1.3 or later",
     long_description=LONG_DESCRIPTION,
     classifiers=[
         "Programming Language :: Python",
