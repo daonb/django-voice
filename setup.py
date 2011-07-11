@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
-import os
-
-version = '0.1'
+from setuptools import find_packages
+from setuptools import setup
+from djangovoice import get_version
 
 LONG_DESCRIPTION = """
 ============
@@ -16,7 +15,7 @@ your users, who can then vote and comment on other suggestions.
 
 setup(
     name='django-voice',
-    version=version,
+    version=get_version(),
     description="django-voice",
     long_description=LONG_DESCRIPTION,
     classifiers=[
@@ -24,15 +23,14 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Django",
         "Environment :: Web Environment",
-    ],
+        ],
     keywords='django,feedback,discussion',
     author='Gökmen Görgen',
     author_email='gokmen@alageek.com',
-    url='https://github.com/gkmngrgn/django-voice',
+    url='https://github.com/negzel/django-voice',
     license='BSD',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=['setuptools'],
-)
-
+    )
