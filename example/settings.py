@@ -1,10 +1,6 @@
 # Django settings for example project.
-
 from os.path import join, abspath
-from sys import path
 
-# add django-voice app to python paths.
-path.append(abspath(".."))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
