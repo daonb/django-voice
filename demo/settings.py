@@ -1,6 +1,9 @@
 # Django settings for example project.
-from os.path import join, abspath
+import os
+import sys
 
+ROOT = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(os.path.split(ROOT)[0])
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -8,7 +11,7 @@ TEMPLATE_DEBUG = DEBUG
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': join(abspath("."), "sqlite3.db")
+        'NAME': '%s/demo.db' % ROOT,
     }
 }
 
@@ -24,7 +27,7 @@ USE_I18N = False # we don't need internalization at the moment
 # calendars according to the current locale
 USE_L10N = True
 
-STATIC_ROOT = join(abspath("."), "static")
+STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
@@ -56,7 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'example.urls'
+ROOT_URLCONF = 'demo.urls'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
