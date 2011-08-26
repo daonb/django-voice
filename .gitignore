@@ -1,4 +1,4 @@
 *.pyc
-example/sqlite3.db
+demo/demo.db
 .project
 .pydevproject
