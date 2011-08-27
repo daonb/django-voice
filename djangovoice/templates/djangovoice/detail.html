@@ -50,7 +50,7 @@
     <span class="feedback-status feedback-status-{{ feedback.status.slug }}">{{ feedback.status.title }}</span>
 </h1>
 
-<p>
+<p class="meta">
     <span class="feedback-user">
         {% if feedback.user %}
         {% trans "Submitted by:" %}
@@ -62,9 +62,6 @@
     </span>
     <span class="feedback-date">{% trans "on" %} {{ feedback.created|date:"d M Y" }}</span>
 </p>
-
-<div class="clear"></div>
-<br />
 {% if feedback.description %}<p>{{ feedback.description|urlize|linebreaksbr }}</p>{% endif %}
 
 
@@ -126,7 +123,7 @@
     {{ form.object_pk }}
     {{ form.timestamp }}
     {{ form.security_hash }}
-    <br /><input type="submit" value="{% trans "Post comment" %}" id="id_submit" />
+    <input type="submit" value="{% trans "Post comment" %}" id="id_submit" class="btn primary" />
 </form>
 {% endif %}
 
