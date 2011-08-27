@@ -8,6 +8,6 @@
 
 <form action="" method="post">
     {% csrf_token %}
-    <p><input type="submit" value="{% trans "Delete Permenantly" %}" /> {% trans "or" %} <a href='../'>{% trans "leave everything as it is" %}</a>.</p>
+    <p><input type="submit" value="{% trans "Delete Permenantly" %}" class="btn primary" /> {% trans "or" %} <a href='../'>{% trans "leave everything as it is" %}</a>.</p>
 </form>
 {% endblock %}
