@@ -94,10 +94,6 @@ html, body {
 	border-top: 1px solid #ddd;
 }
 
-#feedback table.list td {
-    padding: 10px 15px;
-}
-
 #feedback td.details p {
     margin-top: 3px;
 }
@@ -122,6 +118,7 @@ html, body {
     color: #ff0000;
     background-color: #ffcccc;
     font-weight: bold;
+    text-align: center;
 }
 
 .feedback-status {
@@ -158,9 +155,11 @@ html, body {
     font-size: 11px;
     color: #727c82;
 }
+
 #feedback td.details p img, #feedback p .feedback-user img {
     vertical-align: middle;
 }
+
 #feedback td.details p .avatar, #feedback p .feedback-user .avatar {
     margin: 0 5px;
 }
@@ -320,7 +319,7 @@ table.list.list-all .closed {
 }
 
 table.list td {
-    padding: 8px 15px;
+    padding: 8px 10px;
     color: #4b4b4b;
 }
 
@@ -337,6 +336,10 @@ table.list td.title a {
 
 #id_honeypot {
     display: none;
+}
+
+form.vote-button {
+	margin: 0;
 }
 
 form table {

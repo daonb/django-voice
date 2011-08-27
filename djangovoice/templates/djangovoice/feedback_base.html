@@ -42,7 +42,7 @@
 
 	<div class="container">
 		<div class="row" id="content">
-			<div class="span12 columns">
+			<div class="span12 columns" id="feedback">
 				{% for message in messages %}
 					<div class="alert-message{% if message.tags %} {{ message.tags }}{% endif %}">
 						<a class="close" href="#">×</a>
