@@ -391,6 +391,12 @@ input[type="submit"]:active {
 
 form td.label {
     width: 200px;
+    vertical-align: top;
+}
+
+form td.label label {
+	padding: 0;
+	text-align: left;
 }
 
 form td {
@@ -401,6 +407,7 @@ form td.label .form-help, .help-text {
     font-size: 11px;
     color: #999999;
     line-height: 12px;
+    float: left;
 }
 
 form td.field-error input, form td.field-error textarea {
@@ -411,6 +418,8 @@ form td.label .required {
     font-size: 10px;
     color: #999999;
     padding-left: 5px;
+    width: 100%;
+    float: left;
 }
 
 .form-errors {
