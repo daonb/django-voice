@@ -1,5 +1,6 @@
 {% extends "djangovoice/container.html" %}
 {% load i18n %}
+{% load user_name from djangovoice_tags %}
 
 {% block sectionid %}feedback{% endblock %}
 
@@ -26,6 +27,24 @@
 	                        </a>
 	                    </li>
 					{% endblock %}
+				</ul>
+				<ul class="nav secondary-nav">
+					<li class="menu">
+						{% if user.is_authenticated %}
+							<a class="menu" href="#">{% user_name user %}</a>
+							<ul class="menu-dropdown">
+								<li>
+									<a href="/">{% trans "Back to mainpage" %}</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="{% url django.contrib.auth.views.logout %}?next={% url djangovoice_home %}">{% trans "Sign out" %}</a>
+								</li>
+							</ul>
+						{% else %}
+							<a href="{% url django.contrib.auth.views.login %}?next={% url djangovoice_home %}">{% trans "Sign in" %}</a>
+						{% endif %}
+					</li>
 				</ul>
 			</div>
 		</div>
