@@ -382,13 +382,6 @@ input[type="submit"] {
     color: #ffffff;
 }
 
-input[type="submit"]:hover {
-}
-
-input[type="submit"]:active {
-    background-color: #599900;
-}
-
 form td.label {
     width: 200px;
     vertical-align: top;
