@@ -3,11 +3,11 @@ html, body {
 }
 
 #wrapper {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 
 #actions {
-	padding-top: 20px;
+    padding-top: 20px;
 }
 
 #actions ul {
@@ -41,14 +41,14 @@ html, body {
 }
 
 #content {
-	padding-top: 20px;
+    padding-top: 20px;
     background-color: #fff;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
 }
 
 #sidebar {
-	margin-right: 20px;
+    margin-right: 20px;
 }
 
 #sidebar h4 {
@@ -84,7 +84,7 @@ html, body {
 }
 
 #footer {
-	float: right;
+    float: right;
 }
 
 #footer a {
@@ -95,15 +95,15 @@ html, body {
 
 /**** index ****/
 #feedback h2 {
-	margin: 20px 0 0 0;
+    margin: 20px 0 0 0;
 }
 
 #feedback hr {
-	margin: 0;
+    margin: 0;
 }
 
 #feedback table.list {
-	border-top: 1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 #feedback td.details p {
@@ -168,7 +168,7 @@ html, body {
     color: #727c82;
 }
 p.meta {
-	margin-bottom: 50px;
+    margin-bottom: 50px;
 }
 
 #feedback td.details p img, #feedback p .feedback-user img {
@@ -239,7 +239,7 @@ p.meta {
 }
 
 #feedback #vote-up input, #feedback #vote-down input {
-	padding: 5px;
+    padding: 5px;
     background-color: #b1b8bb;
     text-shadow: 1px 1px 0 #7a868b;
 }
@@ -351,12 +351,12 @@ table.list td.title a {
 }
 
 form.vote-button {
-	margin: 0;
+    margin: 0;
 }
 
 form.vote-button input.button {
-	-moz-border-radius: 11px;
-	-webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
 }
 
 form table {
@@ -388,8 +388,8 @@ form td.label {
 }
 
 form td.label label {
-	padding: 0;
-	text-align: left;
+    padding: 0;
+    text-align: left;
 }
 
 form td {
@@ -467,8 +467,8 @@ div.message-content {
 }
 
 div.content img {
-	padding: 2px;
-	border: 1px solid #bbb;
+    padding: 2px;
+    border: 1px solid #bbb;
 }
 
 .comment .details {
