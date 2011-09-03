@@ -61,21 +61,25 @@
     </div>
 
     <div class="container">
-        <div class="row" id="content">
-            <div class="span12 columns" id="feedback">
-                {% for message in messages %}
-                    <div class="alert-message{% if message.tags %} {{ message.tags }}{% endif %}">
-                        <a class="close" href="#">×</a>
-                        <p>{{ message }}</p>
+        <div id="content">
+            <div class="row">
+                <div class="span12">
+                    <div id="feedback">
+                        {% for message in messages %}
+                            <div class="alert-message{% if message.tags %} {{ message.tags }}{% endif %}">
+                                <a class="close" href="#">×</a>
+                                <p>{{ message }}</p>
+                            </div>
+                        {% endfor %}
+
+                        {% block content %}{% endblock %}
                     </div>
-                {% endfor %}
+                </div>
 
-                {% block content %}{% endblock %}
-            </div>
-
-            <div class="span4 columns">
-                <div id="sidebar">
-                    {% block sidebar %}{% endblock %}
+                <div class="span4">
+                    <div id="sidebar">
+                        {% block sidebar %}{% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
