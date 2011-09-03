@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-	    <title>{% block title %}{% endblock %}{% block title_default %} | {% trans "DjangoVoice" %}{% endblock %}</title>
-	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	    <link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}djangovoice/images/favicon.png" />
-	    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangovoice/css/outsource/bootstrap.css" />
-	    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangovoice/css/djangovoice.css" />
-	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
-	    <script src="{{ STATIC_URL }}djangovoice/js/application.js" type="text/javascript"></script>
-	    {% block script_base %}{% endblock %}
-	    {% block script %}{% endblock %}
-	</head>
+    <head>
+	<title>{% block title %}{% endblock %}{% block title_default %} | {% trans "DjangoVoice" %}{% endblock %}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" type="image/png" href="{{ STATIC_URL }}djangovoice/images/favicon.png" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangovoice/css/outsource/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}djangovoice/css/djangovoice.css" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+	<script src="{{ STATIC_URL }}djangovoice/js/application.js" type="text/javascript"></script>
+	{% block script_base %}{% endblock %}
+	{% block script %}{% endblock %}
+    </head>
 
-	<body>
-		{% block body %}{% endblock %}
-	</body>
+    <body>
+	{% block body %}{% endblock %}
+    </body>
 </html>
