@@ -29,5 +29,10 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Framework :: Django",
         "Environment :: Web Environment"
+    ],
+    install_requires=[
+        "Django==1.3",
+        "django-gravatar==0.1.0",
+        "django-voting==0.1"
     ]
 )
