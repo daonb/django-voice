@@ -41,17 +41,17 @@ class Type(models.Model):
 
 
 class Feedback(models.Model):
-    type = models.ForeignKey(Type)
-    title = models.CharField(max_length=500)
-    description = models.TextField(
+    type = models.ForeignKey(Type, verbose_name=_("Type"))
+    title = models.CharField(_("Title"), max_length=500)
+    description = models.TextField(_("Description"),
         blank=True,
         help_text=_('This wiill be viewable by other people - '\
                     'do not include any private details such as '\
                     'passwords or phone numbers here.'))
-    anonymous = models.BooleanField(
+    anonymous = models.BooleanField(_("Anonymous"),
         blank=True,
         help_text=_('Do not show who sent this'))
-    private = models.BooleanField(
+    private = models.BooleanField(_("Private"),
         blank=True,
         help_text=_('Hide from public pages. Only site administrators '\
                     'will be able to view and respond to this.'))
