@@ -45,20 +45,23 @@ class Feedback(models.Model):
     title = models.CharField(_("Title"), max_length=500)
     description = models.TextField(_("Description"),
         blank=True,
-        help_text=_('This wiill be viewable by other people - '\
-                    'do not include any private details such as '\
+        help_text=_('This wiill be viewable by other people - '
+                    'do not include any private details such as '
                     'passwords or phone numbers here.'))
     anonymous = models.BooleanField(_("Anonymous"),
         blank=True,
         help_text=_('Do not show who sent this'))
     private = models.BooleanField(_("Private"),
         blank=True,
-        help_text=_('Hide from public pages. Only site administrators '\
+        help_text=_('Hide from public pages. Only site administrators '
                     'will be able to view and respond to this.'))
-    user = models.ForeignKey(User, blank=True, null=True)
-    created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    status = models.ForeignKey(Status)
-    duplicate = models.ForeignKey('self', null=True, blank=True)
+    user = models.ForeignKey(User, blank=True, null=True,
+        verbose_name=_("User"))
+    created = models.DateTimeField(auto_now_add=True, blank=True, null=True,
+        verbose_name=_("Created at"))
+    status = models.ForeignKey(Status, verbose_name=_("Status"))
+    duplicate = models.ForeignKey('self', null=True, blank=True,
+        verbose_name=_("Duplicate"))
 
     def save(self, *args, **kwargs):
         try:
