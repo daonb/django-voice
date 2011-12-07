@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext as _
 
 STATUS_CHOICES = (
-    ('open', 'Open'),
-    ('closed', 'Closed'),
+    ('open', _('Open')),
+    ('closed', _('Closed')),
 )
 
 
@@ -13,7 +14,7 @@ class Status(models.Model):
     slug = models.SlugField(max_length=500)
     default = models.BooleanField(
         blank=True,
-        help_text='New feedback will have this status')
+        help_text=_('New feedback will have this status'))
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default="open")
 
@@ -44,16 +45,16 @@ class Feedback(models.Model):
     title = models.CharField(max_length=500)
     description = models.TextField(
         blank=True,
-        help_text='This wiill be viewable by other people - '\
-                  'do not include any private details such as '\
-                  'passwords or phone numbers here.')
+        help_text=_('This wiill be viewable by other people - '\
+                    'do not include any private details such as '\
+                    'passwords or phone numbers here.'))
     anonymous = models.BooleanField(
         blank=True,
-        help_text='Do not show who sent this')
+        help_text=_('Do not show who sent this'))
     private = models.BooleanField(
         blank=True,
-        help_text='Hide from public pages. Only site administrators '\
-                  'will be able to view and respond to this.')
+        help_text=_('Hide from public pages. Only site administrators '\
+                    'will be able to view and respond to this.'))
     user = models.ForeignKey(User, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     status = models.ForeignKey(Status)
