@@ -18,7 +18,7 @@ class Status(models.Model):
     status = models.CharField(
         max_length=10, choices=STATUS_CHOICES, default="open")
 
-    def save(self):
+    def save(self, *args, **kwargs):
         if self.default == True:
             try:
                 default_project = Status.objects.get(default=True)
@@ -26,7 +26,7 @@ class Status(models.Model):
                 default_project.save()
             except:
                 pass
-        super(Status, self).save()
+        super(Status, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return self.title
@@ -72,7 +72,7 @@ class Feedback(models.Model):
             except:
                 default = Status.objects.filter()[0]
             self.status = default
-        super(Feedback, self).save()
+        super(Feedback, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         return ('djangovoice_item', (self.id,))

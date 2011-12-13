@@ -30,6 +30,7 @@ class FeedbackTestCase(unittest.TestCase):
         feedback_type = Type.objects.create(title='Bug', slug='bug')
         feedback_user = User.objects.create_user(
             username='djangovoice', email='django@voice.com')
+        status = Status.objects.create(title='new', slug='new', default=True)
         self.login_form_does_not_work = Feedback.objects.create(
             type=feedback_type,
             title='Login form does not work.',
