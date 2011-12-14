@@ -1,0 +1,324 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: urua1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-13 22:29+0200\n"
+"PO-Revision-Date: 2011-12-14 11:06+0200\n"
+"Last-Translator: benny daon <bennydaon@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: models.py:7
+#: templates/djangovoice/feedback_base.html:20
+msgid "Open"
+msgstr "פתוח"
+
+#: models.py:8
+#: templates/djangovoice/feedback_base.html:21
+msgid "Closed"
+msgstr "סגור"
+
+#: models.py:17
+msgid "New feedback will have this status"
+msgstr "ענינים חדשים יווצרו עם הסטטוס הזה"
+
+#: models.py:44
+#: templates/djangovoice/sidebar.html:13
+msgid "Type"
+msgstr "סוג"
+
+#: models.py:45
+msgid "Title"
+msgstr "כותרת"
+
+#: models.py:46
+msgid "Description"
+msgstr "תאור"
+
+#: models.py:48
+msgid "This wiill be viewable by other people - do not include any private details such as passwords or phone numbers here."
+msgstr "מידע ציבורי שכל המשתמשים יראו - נא לא לכלול מידע פראי כגון ססמאות ומספרי טלפון"
+
+#: models.py:51
+msgid "Anonymous"
+msgstr "אלמוני"
+
+#: models.py:53
+msgid "Do not show who sent this"
+msgstr "הסתר את זהות השולח"
+
+#: models.py:54
+msgid "Private"
+msgstr "פרטי"
+
+#: models.py:56
+msgid "Hide from public pages. Only site administrators will be able to view and respond to this."
+msgstr "אל תציג לציבור - רק מנהלי המערכת יוכלו לראות ולעגיב"
+
+#: models.py:59
+msgid "User"
+msgstr "משתמש"
+
+#: models.py:61
+msgid "Created at"
+msgstr "נוצר ב"
+
+#: models.py:62
+#: templates/djangovoice/sidebar.html:3
+msgid "Status"
+msgstr "סטטוס"
+
+#: models.py:64
+msgid "Duplicate"
+msgstr "משוכפל"
+
+#: views.py:51
+msgid "Open Feedback"
+msgstr "ענין פתוח"
+
+#: views.py:54
+msgid "Closed Feedback"
+msgstr "ענין סגור"
+
+#: views.py:57
+msgid "My Feedback"
+msgstr "ענין שלי"
+
+#: views.py:60
+#: templates/djangovoice/detail.html:7
+#: templates/djangovoice/feedback_base.html:15
+#: templates/djangovoice/submit.html:3
+#: templates/djangovoice/submit.html:9
+#: templates/djangovoice/widget.html:7
+msgid "Feedback"
+msgstr "ענין"
+
+#: views.py:112
+msgid "Thanks for feedback."
+msgstr "תודה על תיעוד הענין"
+
+#: views.py:118
+msgid "Form is invalid."
+msgstr "טופס לא חוקי"
+
+#: templates/djangovoice/container.html:4
+msgid "DjangoVoice"
+msgstr ""
+
+#: templates/djangovoice/delete.html:3
+#: templates/djangovoice/detail.html:12
+msgid "Delete"
+msgstr "מחק"
+
+#: templates/djangovoice/delete.html:6
+msgid "Are you sure you wish to delete this feedback item completely, and all of the comments associated with it?"
+msgstr "האת אתה בטוח שרוצנך למחוק את הענין ואל כל התגובות הקשורות?"
+
+#: templates/djangovoice/delete.html:7
+msgid "There is <strong>no way to undo this!</strong>"
+msgstr ""
+
+#: templates/djangovoice/delete.html:11
+msgid "Delete Permenantly"
+msgstr "מח לצמיתות"
+
+#: templates/djangovoice/delete.html:11
+msgid "or"
+msgstr "או"
+
+#: templates/djangovoice/delete.html:11
+msgid "leave everything as it is"
+msgstr "לא לשנות כלום"
+
+#: templates/djangovoice/detail.html:11
+#: templates/djangovoice/edit.html:3
+msgid "Edit"
+msgstr "ערוך"
+
+#: templates/djangovoice/detail.html:19
+msgid "Duplicate of"
+msgstr "שכפול של"
+
+#: templates/djangovoice/detail.html:27
+#, python-format
+msgid ""
+"\n"
+"        from %(score.num_votes)s Vote%(score.num_votes|pluralize)s\n"
+"        "
+msgstr ""
+
+#: templates/djangovoice/detail.html:56
+#: templates/djangovoice/list.html:47
+msgid "Submitted by:"
+msgstr "דווח על ידי:"
+
+#: templates/djangovoice/detail.html:57
+#: templates/djangovoice/detail.html:58
+#: templates/djangovoice/list.html:49
+msgid "View profile"
+msgstr "ראה פרופיל"
+
+#: templates/djangovoice/detail.html:60
+#: templates/djangovoice/list.html:55
+msgid "Submitted anonymously"
+msgstr "דווח ע\"י אלמוני"
+
+#: templates/djangovoice/detail.html:63
+#: templates/djangovoice/detail.html:101
+#: templates/djangovoice/list.html:59
+msgid "on"
+msgstr "ב"
+
+#: templates/djangovoice/detail.html:72
+#, python-format
+msgid ""
+"\n"
+"    Comments (%(comment_count)s)\n"
+"    "
+msgstr ""
+
+#: templates/djangovoice/detail.html:89
+msgid "Staff"
+msgstr "צוות"
+
+#: templates/djangovoice/detail.html:94
+msgid "From:"
+msgstr "מאת:"
+
+#: templates/djangovoice/detail.html:96
+msgid "you"
+msgstr "אתה"
+
+#: templates/djangovoice/detail.html:101
+msgid "at"
+msgstr "ב"
+
+#: templates/djangovoice/detail.html:111
+msgid "No one has commented. Have your say."
+msgstr "אף אחד לא הגיב עדיין. נשמח לספתח."
+
+#: templates/djangovoice/detail.html:115
+msgid "Leave a comment"
+msgstr "הער"
+
+#: templates/djangovoice/detail.html:126
+msgid "Post comment"
+msgstr "שלח  הערה"
+
+#: templates/djangovoice/edit.html:14
+msgid "Save"
+msgstr "שמור"
+
+#: templates/djangovoice/feedback_base.html:7
+msgid "Latest feedback"
+msgstr "הענינים האחרונים"
+
+#: templates/djangovoice/feedback_base.html:19
+#: templates/djangovoice/sidebar.html:7
+#: templates/djangovoice/sidebar.html:17
+msgid "All"
+msgstr "הכל"
+
+#: templates/djangovoice/feedback_base.html:22
+msgid "Mine"
+msgstr "שלי"
+
+#: templates/djangovoice/feedback_base.html:24
+msgid "Subscribe to the feedback RSS feed"
+msgstr "מנוי לחדשות הענין"
+
+#: templates/djangovoice/feedback_base.html:36
+msgid "Back to mainpage"
+msgstr "בחזרה לעמוד ראשי"
+
+#: templates/djangovoice/feedback_base.html:41
+msgid "Sign out"
+msgstr "צא"
+
+#: templates/djangovoice/feedback_base.html:46
+msgid "Sign in"
+msgstr "הכנס"
+
+#: templates/djangovoice/feedback_base.html:57
+msgid "Submit feedback"
+msgstr "שלח ענין"
+
+#: templates/djangovoice/feedback_base.html:89
+msgid "Powered by django-voice"
+msgstr ""
+
+#: templates/djangovoice/list.html:41
+#, python-format
+msgid "comment%(comment_count|pluralize)s"
+msgstr ""
+
+#: templates/djangovoice/list.html:64
+msgid "PRIVATE"
+msgstr "פרטי"
+
+#: templates/djangovoice/list.html:73
+msgid "first"
+msgstr "ראשון"
+
+#: templates/djangovoice/list.html:74
+msgid "previous"
+msgstr "קודם"
+
+#: templates/djangovoice/list.html:78
+msgid "Page"
+msgstr "עמוד"
+
+#: templates/djangovoice/list.html:78
+msgid "of"
+msgstr "מתוך"
+
+#: templates/djangovoice/list.html:82
+msgid "next"
+msgstr "הבא"
+
+#: templates/djangovoice/list.html:83
+msgid "last"
+msgstr "אחרון"
+
+#: templates/djangovoice/list.html:88
+msgid "No-one has contributed any feedback yet. Be the first and submit some feedback!"
+msgstr ""
+
+#: templates/djangovoice/submit.html:19
+#: templates/djangovoice/widget.html:44
+msgid "Submit"
+msgstr "שלך"
+
+#: templates/djangovoice/widget.html:15
+msgid "Share your thinking with us."
+msgstr "חלוק את מחשבותיך עימנו"
+
+#: templates/djangovoice/widget.html:24
+msgid "Title (required)"
+msgstr "כותרת"
+
+#: templates/djangovoice/widget.html:27
+msgid "Write description about your thinking."
+msgstr "תיאור"
+
+#: templates/djangovoice/widget.html:51
+msgid "Please login to use feedback application."
+msgstr "אנא הכנס כדי לדון על ענינים"
+
+#: templates/djangovoice/includes/fields.html:6
+msgid "required"
+msgstr "נדרש"
+
+#: templates/djangovoice/tags/widget.html:15
+msgid "feedback"
+msgstr "ענין"
+
